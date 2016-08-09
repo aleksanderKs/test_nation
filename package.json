@@ -1,0 +1,19 @@
+{
+  "name": "test_nation",
+  "version": "1.0.0",
+  "description": "A small test detecting based on your answers which one countrie do you really belong in This test is not based on any scientific study whatsoever. It is intended for fun only so do not treat the result too seriously",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aleksanderKs/test_nation.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aleksanderKs/test_nation/issues"
+  },
+  "homepage": "https://github.com/aleksanderKs/test_nation#readme"
+}
