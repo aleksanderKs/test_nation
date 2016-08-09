@@ -1,33 +1,30 @@
  'use strict'
 
 var questions = [{
-    question: "What is the population of Brazil?",
-    choices: ["145 million", "199 million", "182 million", "205 million"],
+    question: "A great past time for you consists of:",
+    choices: ["Drinking alcholic beverages.", "Smoking.", "Shooting a gun.", "Eating."],
     correctAnswer: 1
 }, {
-    question: "What is 27*14?",
-    choices: ["485", "634", "408", "528"],
+    question: "What's most important thing in society'?",
+    choices: ["Sport", "Money", "Religion", "Power"],
     correctAnswer: 2
 }, {
-    question: "What is the busiest train station in the world?",
-    choices: ["Grand Central, NY", "Shibuya, Tokyo", "Beijing Central, Chine", "Gard du Nord, Paris"],
+    question: "Pick a morning dring to start your day?",
+    choices: ["Vodka", "Beer", "Сofee/tea", "champagne"],
     correctAnswer: 1
 }, {
-    question: "What is the longest river?",
-    choices: ["Nile", "Amazon", "Mississippi", "Yangtze"],
+    question: "Given the choices, you`d prefer to eat?",
+    choices: ["Taco's", "Steak", "Hamburger", "Pizza"],
     correctAnswer: 0
 }, {
-    question: "What is the busiest tube station in the London?",
-    choices: ["Waterloo", "Baker Street", "Kings Cross", "Victoria"],
+    question: "You would prefer to live?",
+    choices: ["In a forest.", "I don`t really care.", "By the beach.", "In Siberia"],
     correctAnswer: 0
 }];
 
 var currentQuestion = 0;
 var correctAnswers = 0;
 var quizOver = false;
-
-
-
 
 
 $(document).ready(function(){
@@ -73,12 +70,12 @@ $(document).ready(function(){
         }
     });
 
-});
+
 
 // This displays the current question AND the choices
 function displayCurrentQuestion() {
 
-    console.log("In display current Question");
+    console.log("question is displayd");
 
     var question = questions[currentQuestion].question;
     var questionClass = $(document).find(".quizContainer > .question");
@@ -113,16 +110,11 @@ function hideScore() {
     $(document).find(".result").hide();
 }
 
-
-
-
-
-
-
 const $body   = $('body');
 
 const $button = $('.btn')
 $button.click(function(){
+
 let $input = $('#search').val();
 console.log('clicked')
 console.log($input)
@@ -139,13 +131,10 @@ console.log($input)
         console.log(cap.area)
         // console.log(cap.region)
 
+        })
 
-
-
-    })
-
-       }
+        }
 
  })
  })
-
+});
