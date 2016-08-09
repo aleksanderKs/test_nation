@@ -1,30 +1,27 @@
  'use strict'
 $(document).ready(function(){
-
 const $body   = $('body');
 //const $ul     = $('<ul>');
 const $button = $('.btn')
 
-  $button.on('click', function(){
-
-
+  $button.click(function(){
+let $input = $('#search').val();
+console.log('clicked')
+console.log($input)
  $.ajax({
 
-  url:'https://restcountries.eu/rest/v1/capital/q',
+  url:'https://restcountries.eu/rest/v1/capital/' + $input,
   method: 'GET',
   dataType: 'json',
   data: {
-    "q": q
-//     name: //get this value from input
-   },
-  success: function(data) {
-//     // let $div= $('.list')
-//     // $ul.empty();
 
+        },
+  success: function(data) {
+console.log(data)
       data.forEach(function(cap) {
-        console.log(cap.capital)
-        console.log(cap.region)
-          // console.log(capital.region)
+        console.log(cap.area)
+        // console.log(cap.region)
+
 
 
 
