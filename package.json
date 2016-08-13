@@ -15,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/aleksanderKs/test_nation/issues"
   },
-  "homepage": "https://github.com/aleksanderKs/test_nation#readme"
+  "homepage": "https://github.com/aleksanderKs/test_nation#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "ejs": "^2.5.1",
+    "express": "^4.14.0",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1"
+  }
 }

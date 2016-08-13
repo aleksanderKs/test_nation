@@ -4,14 +4,15 @@ const path            = require('path');
 const logger          = require('morgan');
 const bodyParser      = require('body-parser');
 const session         = require('express-session');
-
+const passport        = require('passport')
+const FacebookStrategy = require('passport-facebook').Strategy;
 const homeRoute       = require('./routes/home');
-// const beerAPIRoute    = require('./routes/beer_api');
-//const userRoute       = require('./routes/user');
 const request         = require('request');
-const app             = express();
+ const app             = express();
 const port            = process.env.PORT || 3000;
 app.set('views',path.join(__dirname, 'views'));
+const FACEBOOK_APP_ID = '1676993712624548';
+const FACEBOOK_APP_SECRET = '7b8ef5afa71b0541ecc79fc65457b9a7';
 
 
 app.use(express.static(path.join(__dirname,'public')));

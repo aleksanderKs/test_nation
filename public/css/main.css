@@ -18,6 +18,10 @@ p {
     font-family:'Rokkitt', serif;
 }
 /* Quiz Classes */
+
+#ItemPreviews{float:right;
+margin-right: 20px;
+}
  .quizContainer {
     background-color: lightgoldenrodyellow;
     border-radius: 6px;

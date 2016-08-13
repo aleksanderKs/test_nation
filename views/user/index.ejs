@@ -4,31 +4,118 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Beer Shop</title>
-  <link rel="stylesheet" href="/css/main.css">
   <script   src="https://code.jquery.com/jquery-2.2.4.js" ></script>
+<!--   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+  <link rel="stylesheet" href="/css/main.css">
   <script type="text/javascript" src="/js/script.js"></script>
 </head>
 <body>
-  <h1>
-    Test
-  </h1>
-    <h1>What Nationality Are You Subconsciously  </h1>
-<button class="btn">CLick</button>
-<input id="search" type="text" name="input">
-
-
-<div class="quizContainer">
-         <h1>Hello! Welcome to my Quiz!</h1>
-
-        <div class="question"></div>
-        <ul class="choiceList"></ul>
-        <div class="quizMessage"></div>
-        <div class="result"></div>
-        <div class="nextButton">Next Question</div>
-        <br>
-</div>
+<script>
 
 
 
-</body>
-</html>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1676993712624548',
+      xfbml      : true,
+      version    : 'v2.7'
+    });
+
+FB.getLoginStatus(function(response){
+
+if (response.status === 'connected') {
+document.getElementById('status').innerHTML = "we are connected to Facebook";
+}
+
+else if (response.status === 'not_authorized') {
+  document.getElementById('status').innerHTML = "Not connected"
+}
+else {
+  document.getElementById('status').innerHTML = "you are not logged in to facebook"
+}
+
+});
+};
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7&appId=1676993712624548";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+  function post() {
+FB.api("/me/feed", "post", {message: "my first status...app.js"}, function(response){
+  document.getElementById('status').innerHTML = response.id
+})
+
+}
+
+function post() {
+FB.api("/me/feed", "post", {link: 'https://scotch.io/tutorials/easy-node-authentication-facebook'}, function(response){
+  document.getElementById('status').innerHTML = response.id
+})
+
+}
+
+
+
+  function login() {
+FB.login(function(response){
+if (response.status === 'connected') {
+document.getElementById('status').innerHTML = "we are con"
+}
+
+else if (response.status === 'not_authorized') {
+  document.getElementById('status').innerHTML = "Not connected"
+}
+else {
+  document.getElementById('status').innerHTML = "you are not logged in to facebook"
+}
+} ,{scope:'public_actions'});
+}
+</script>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7&appId=1676993712624548";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<div class="fb-share-button" data-href="http://arcane-sea-52275.herokuapp.com/  " data-layout="button_count" data-size="small" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Farcane-sea-52275.herokuapp.com%2F&amp;src=sdkpreparse">Share</a></div>
+
+<div id ='status'> </div>
+<button onclick="login()" class="fb-login-button " data-show-faces="true"></button>
+
+
+  <h1>What Nationality Are You Subconsciously  </h1>
+
+    <div class="quizContainer">
+    <h1>Hello! Welcome to my Quiz!</h1>
+
+    <div class="question"></div>
+    <ul class="choiceList"></ul>
+    <div class="quizMessage"></div>
+    <div class="result"></div>
+    <div class="nextButton">Next Question</div>
+    <button class="btn">See result</button>
+    <br>
+  </div>
+
+  <img id="ItemPreview1" src="" />
+   <img id="ItemPreview2" src="" />
+    <img id="ItemPreview3" src="" />
+     <img id="ItemPreview4" src="" />
+
+
+
+
+  </div>
+
+  </body>
+  </html>
