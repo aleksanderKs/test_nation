@@ -1,5 +1,88 @@
  'use strict'
 
+window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1676993712624548',
+      xfbml      : true,
+      version    : 'v2.7'
+    });
+
+function hideContainer(){
+$(document).find(".quizContainer").hide();
+
+}
+
+
+FB.getLoginStatus(function(response){
+
+if (response.status === 'connected') {
+document.getElementById('status').innerHTML = "You are connected to Facebook!";
+
+
+}
+
+else if (response.status === 'not_authorized') {
+  document.getElementById('status').innerHTML = "Not connected"
+ hideContainer();
+}
+else {
+  document.getElementById('status').innerHTML = "You are not logged in to facebook, please log in to take a quiz"
+ hideContainer();
+}
+
+});
+};
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7&appId=1676993712624548";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+  function post() {
+FB.api("/me/feed", "post", {message: "my first status...app.js"}, function(response){
+  document.getElementById('status').innerHTML = response.id
+})
+
+}
+
+function post() {
+FB.api("/me/feed", "post", {link: 'https://scotch.io/tutorials/easy-node-authentication-facebook'}, function(response){
+  document.getElementById('status').innerHTML = response.id
+})
+
+}
+function logout(){
+FB.logout(function(response) {
+ document.getElementById('status').innerHTML = "You are logged out"
+
+})
+};
+
+  function login() {
+FB.login(function(response){
+if (response.status === 'connected') {
+document.getElementById('status').innerHTML = "we are con"
+
+}
+
+else if (response.status === 'not_authorized') {
+  document.getElementById('status').innerHTML = "Not connected";
+   hideContainer();
+
+}
+else {
+  document.getElementById('status').innerHTML = "You are not logged in into facebook, please log in to take a quiz";
+
+
+}
+} ,{scope:'public_actions'});
+}
+
+
+
 var questions = [{
     question: "A great past time for you consists of:",
     choices: ["Drinking alcholic beverages.", "Smoking.", "Shooting a gun.", "Eating."],
@@ -83,12 +166,12 @@ $(document).ready(function(){
         }
     });
 
-
- var deImg = $(document).find("#ItemPreview1").attr('src', 'images/ger.jpg').hide();
- var parImg =$(document).find("#ItemPreview2").attr('src','images/fr.gif').hide();
-  var mosImg =$(document).find("#ItemPreview3").attr('src','images/ms.png').hide();
-   var engIsh =$(document).find("#ItemPreview4").attr('src','images/eng.jpg').hide();
-
+ // var all = $(document).find("#all").hide()
+ const deImg = $(document).find("#ItemPreview1").attr('src', 'images/ger.jpg').hide();
+ const parImg =$(document).find("#ItemPreview2").attr('src','images/fr.gif').hide();
+ const mosImg =$(document).find("#ItemPreview3").attr('src','images/ms.png').hide();
+   const engIsh =$(document).find("#ItemPreview4").attr('src','images/eng.jpg').hide();
+const  amer = $(document).find("#ItemPreview5").attr('src','images/capamer.png').hide();
  function displayCurrentQuestion() {
 
     console.log("question is displayd");
@@ -151,7 +234,7 @@ let $input = $('#search').val();
 if (correctAnswers == 0) {
   $input = "washington";
   $(document).find(".btn").show();
-
+    amer.show();
     hideContainer();
 }
 
@@ -195,18 +278,20 @@ console.log($input)
   success: function(data) {
   console.log(data)
       data.forEach(function(cap) {
-        let $div =$('#ItemPreviews');
+        let $div =$('#all');
 
 
          let $p2 = $('<p>').text("Country name: "+cap.name)
         let $p = $('<p>').text("Area is:  " + cap.area)
         let $p3 = $('<p>').text("Population:  " + cap.population)
+            let $p4 = $('<p>').text("Region:  " + cap.subregion)
         console.log(cap.area)
          console.log(cap.name)
         // console.log(cap.region)
         $div.append($p);
         $div.append($p2);
         $div.append($p3);
+        $div.append($p4)
 
         // $body.append($h2)
 
