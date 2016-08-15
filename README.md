@@ -3,7 +3,7 @@
 A small test detecting based on your answers which one countrie do you really belong in
 This test is not based on any scientific study whatsoever. It is intended for fun only so do not treat the result too seriously 
 
-This app will show the government warning index and description, based on a search of country. It will also give basic info about the country needed by the casual traveller. It will also provide a place for travellers to voice their own experiences in the country to encourage or discourage fellow travellers to visit. 
+ 
 
 ## User Stories
 
@@ -24,6 +24,6 @@ MVP goals:
 
   - [Google Translate Api](http://free.currencyconverterapi.com/api/v3/countries)
 
-## Wireframes
+ 
 
-  - Check out our wireframes [here](./wireframes)
+ 

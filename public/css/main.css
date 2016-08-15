@@ -1,9 +1,10 @@
 body{background-color: #F59B9B}
 .wrapper{text-align: center;}
-
+.btn{margin-left: 260px;}
  h1 {
     font-family:'Rokkitt', serif;
     text-align: center;
+}
 }
 ul {
     list-style: none;

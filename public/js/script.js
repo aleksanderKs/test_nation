@@ -1,5 +1,14 @@
  'use strict'
 
+function hideFeedb(){
+
+ $(document).find("#feedback").hide();
+ $(document).find("#feedBackSearch").hide();
+ $(document).find("#submitFeedback").hide();
+}
+
+
+
 window.fbAsyncInit = function() {
     FB.init({
       appId      : '1676993712624548',
@@ -11,17 +20,6 @@ function hideContainer(){
 $(document).find(".quizContainer").hide();
 
 }
-
-
-function hideFeedb(){
-
- $(document).find("#feedback").hide();
- $(document).find("#feedBackSearch").hide();
- $(document).find("#submitFeedback").hide();
-}
-
-
-
 
 FB.getLoginStatus(function(response){
 if (response.status === 'connected') {
@@ -289,7 +287,8 @@ let $input = $('#search').val();
 if (correctAnswers == 0) {
   $input = "moscow";
   $(document).find(".btn").show();
-    amer.show();
+   mosImg.show();
+
  $(document).find("#feedback").show();
  $(document).find("#feedBackSearch").show();
  $(document).find("#submitFeedback").show();
@@ -307,7 +306,7 @@ else if (correctAnswers == 1) {
 else if (correctAnswers == 2) {
   $input = "washington";
   $(document).find(".btn").show();
-  mosImg.show();
+   amer.show();
   ShowFeedb()
     hideContainer();
 }
