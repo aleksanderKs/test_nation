@@ -287,7 +287,7 @@ $button.click(function(){
 let $input = $('#search').val();
 
 if (correctAnswers == 0) {
-  $input = "washington";
+  $input = "moscow";
   $(document).find(".btn").show();
     amer.show();
  $(document).find("#feedback").show();
@@ -305,7 +305,7 @@ else if (correctAnswers == 1) {
 }
 
 else if (correctAnswers == 2) {
-  $input = "moscow";
+  $input = "washington";
   $(document).find(".btn").show();
   mosImg.show();
   ShowFeedb()
