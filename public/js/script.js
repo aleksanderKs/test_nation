@@ -13,21 +13,31 @@ $(document).find(".quizContainer").hide();
 }
 
 
-FB.getLoginStatus(function(response){
+function hideFeedb(){
 
+ $(document).find("#feedback").hide();
+ $(document).find("#feedBackSearch").hide();
+ $(document).find("#submitFeedback").hide();
+}
+
+
+
+
+FB.getLoginStatus(function(response){
 if (response.status === 'connected') {
 document.getElementById('status').innerHTML = "You are connected to Facebook!";
-
-
+hideFeedb()
 }
 
 else if (response.status === 'not_authorized') {
   document.getElementById('status').innerHTML = "Not connected"
  hideContainer();
+ hideFeedb()
 }
 else {
   document.getElementById('status').innerHTML = "You are not logged in to facebook, please log in to take a quiz"
  hideContainer();
+ hideFeedb()
 }
 
 });
@@ -52,7 +62,6 @@ function post() {
 FB.api("/me/feed", "post", {link: 'https://scotch.io/tutorials/easy-node-authentication-facebook'}, function(response){
   document.getElementById('status').innerHTML = response.id
 })
-
 }
 function logout(){
 FB.logout(function(response) {
@@ -75,13 +84,8 @@ else if (response.status === 'not_authorized') {
 }
 else {
   document.getElementById('status').innerHTML = "You are not logged in into facebook, please log in to take a quiz";
-
-
+}} ,{scope:'public_actions'});
 }
-} ,{scope:'public_actions'});
-}
-
-
 
 var questions = [{
     question: "A great past time for you consists of:",
@@ -112,10 +116,6 @@ var questions = [{
 }];
 
 var images =["ger.jpg"]
-// {image2:""}
-// {image3:""}
-// {image4:""} ]
-
 var currentQuestion = 0;
 var correctAnswers = 0;
 var quizOver = false;
@@ -124,10 +124,55 @@ var France = 0;
 var Italian =0;
 
 $(document).ready(function(){
+  const currentBeer = null;
+   const $ul = $('<ul>')
+  const $div = $('#brApend');
+ const $feedbackbtn = $('#submitFeedback');
+ const $feedbackDisplayBtn = $('#feedBackSearch');
+ const $divFeedBack = $('#brApendFeedBack');
 
-    displayCurrentQuestion();
+$feedbackDisplayBtn.on('click', function() {
+$ul.empty();
+$div.empty();
+
+   $.ajax({
+      url:'./feedback/get',
+      method: 'GET',
+      dataType: 'json',
+
+      success: function(data) {
+        console.log('To display :',data);
+
+
+        data.forEach(function(beer) {
+        let $p = $('<p>').addClass('fed').text('Feedback :' + beer.FeedBack).after("<br />")
+        $divFeedBack.append($p).append($('<hr>'))
+
+    });
+    }
+    });
+    });
+
+$feedbackbtn.on('click', function() {
+   const $feedbackValue = $('#feedback').val();
+   console.log('YES is coming :' );
+
+$.ajax({
+      url:'./feedback/save',
+      method: 'POST',
+      dataType: 'json',
+      data: currentBeer,
+      success: function(data) {
+        $('#feedback').hide();
+        $('#submitFeedback').hide();
+        $div.empty();
+
+  }
+    });
+  });
+
+displayCurrentQuestion();
     $(this).find(".quizMessage").hide();
-
     // On clicking next, display the next question
     $(this).find(".nextButton").on("click", function () {
             if (!quizOver) {
@@ -166,24 +211,23 @@ $(document).ready(function(){
         }
     });
 
- // var all = $(document).find("#all").hide()
  const deImg = $(document).find("#ItemPreview1").attr('src', 'images/ger.jpg').hide();
  const parImg =$(document).find("#ItemPreview2").attr('src','images/fr.gif').hide();
  const mosImg =$(document).find("#ItemPreview3").attr('src','images/ms.png').hide();
-   const engIsh =$(document).find("#ItemPreview4").attr('src','images/eng.jpg').hide();
-const  amer = $(document).find("#ItemPreview5").attr('src','images/capamer.png').hide();
- function displayCurrentQuestion() {
+ const engIsh =$(document).find("#ItemPreview4").attr('src','images/eng.jpg').hide();
+ const  amer = $(document).find("#ItemPreview5").attr('src','images/capamer.png').hide();
 
-    console.log("question is displayd");
+
+ function displayCurrentQuestion() {
+     console.log("question is displayd");
     var question = questions[currentQuestion].question;
     var questionClass = $(document).find(".quizContainer > .question");
     var choiceList = $(document).find(".quizContainer > .choiceList");
     var numChoices = questions[currentQuestion].choices.length;
 
     $(questionClass).text(question);
-    // Remove all current <li> elements (if any)
-    $(choiceList).find("li").remove();
 
+    $(choiceList).find("li").remove();
     var choice;
     for ( let i = 0; i < numChoices; i++) {
         choice = questions[currentQuestion].choices[i];
@@ -216,6 +260,19 @@ function hideBtn() {
 }
 
 
+
+
+function ShowFeedb(){
+
+ $(document).find("#feedback").show();
+ $(document).find("#feedBackSearch").show();
+ $(document).find("#submitFeedback").show();
+}
+
+
+
+
+
 function hideContainer(){
 $(document).find(".quizContainer").hide();
 
@@ -229,12 +286,13 @@ $button.click(function(){
 
 let $input = $('#search').val();
 
-// var $input;
-
 if (correctAnswers == 0) {
   $input = "washington";
   $(document).find(".btn").show();
     amer.show();
+ $(document).find("#feedback").show();
+ $(document).find("#feedBackSearch").show();
+ $(document).find("#submitFeedback").show();
     hideContainer();
 }
 
@@ -242,6 +300,7 @@ else if (correctAnswers == 1) {
   $input = "berlin";
   $(document).find(".btn").show();
   deImg.show();
+  ShowFeedb()
   hideContainer();
 }
 
@@ -249,12 +308,14 @@ else if (correctAnswers == 2) {
   $input = "moscow";
   $(document).find(".btn").show();
   mosImg.show();
+  ShowFeedb()
     hideContainer();
 }
 
 else if (correctAnswers == 3) {
   $input = "london";
   engIsh.show();
+  ShowFeedb()
   $(document).find(".btn").show();
    hideContainer();
 }
@@ -263,12 +324,10 @@ else if (correctAnswers == 4) {
   $input = "paris";
   $(document).find(".btn").show();
    parImg.show();
+   ShowFeedb()
    hideContainer();
 }
-
-console.log('clicked')
-console.log($input)
- $.ajax({
+  $.ajax({
   url:'https://restcountries.eu/rest/v1/capital/' + $input,
   method: 'GET',
   dataType: 'json',
@@ -280,25 +339,20 @@ console.log($input)
       data.forEach(function(cap) {
         let $div =$('#all');
 
-
-         let $p2 = $('<p>').text("Country name: "+cap.name)
+        let $p2 = $('<p>').text("Country name: "+cap.name)
         let $p = $('<p>').text("Area is:  " + cap.area)
         let $p3 = $('<p>').text("Population:  " + cap.population)
-            let $p4 = $('<p>').text("Region:  " + cap.subregion)
+        let $p4 = $('<p>').text("Region:  " + cap.subregion)
         console.log(cap.area)
-         console.log(cap.name)
-        // console.log(cap.region)
+        console.log(cap.name)
+
         $div.append($p);
         $div.append($p2);
         $div.append($p3);
         $div.append($p4)
 
-        // $body.append($h2)
-
         })
-
         }
-
  })
  })
 });
